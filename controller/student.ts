@@ -18,3 +18,32 @@ export const postStudent = async (
     next(error);
   }
 };
+
+export const getStudents = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const students = await Student.find({});
+    res.json({ data: students });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateStudent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { first_name } = req.body;
+  try {
+    const updatedStudent = await Student.findOneAndUpdate({
+      first_name,
+    });
+    res.json({ data: updateStudent });
+  } catch (error) {
+    next(error);
+  }
+};
